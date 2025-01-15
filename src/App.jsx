@@ -1,9 +1,10 @@
 import { useContext, useState } from "react";
 import List from "./List";
-import Item from "./Item";
+import Item from "./Components/Item";
 // import { Fruit } from "./Item"
-import Form from "./Form";
+import Form from "./Components/Form";
 import { AppContext } from "./ThemedApp";
+import Header from "./Components/Header";
 export default function App() {
   const [data, setData] = useState([
     { id: 1, content: "Hello World!", name: "Alice" },
@@ -28,62 +29,63 @@ export default function App() {
   };
 
   return (
-    <div
-      style={{
-        minHeight: 1500,
-        background: mode === "dark" ? "black" : "white",
-        color: mode === "dark" ? "white" : "black",
-        paddingTop: 20,
-      }}
-    >
-      <div style={{ maxWidth: 600, margin: "20px auto" }}>
-        <h1
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          Conversation
-          <div>
-            <button
-              onClick={() => setShowForm(!showForm)}
-              style={{
-                width: 32,
-                height: 32,
-                borderRadius: 50,
-                border: "0 none",
-                background: showForm ? "#dc3545" : "#0d6efd",
-                color: "white",
-              }}
-            >
-              {showForm ? "×" : "+"}
-            </button>
+    <Header />
+    // <div
+    //   style={{
+    //     minHeight: 1500,
+    //     background: mode === "dark" ? "black" : "white",
+    //     color: mode === "dark" ? "white" : "black",
+    //     paddingTop: 20,
+    //   }}
+    // >
+    //   <div style={{ maxWidth: 600, margin: "20px auto" }}>
+    //     <h1
+    //       style={{
+    //         display: "flex",
+    //         justifyContent: "space-between",
+    //         alignItems: "center",
+    //       }}
+    //     >
+    //       Conversation
+    //       <div>
+    //         <button
+    //           onClick={() => setShowForm(!showForm)}
+    //           style={{
+    //             width: 32,
+    //             height: 32,
+    //             borderRadius: 50,
+    //             border: "0 none",
+    //             background: showForm ? "#dc3545" : "#0d6efd",
+    //             color: "white",
+    //           }}
+    //         >
+    //           {showForm ? "×" : "+"}
+    //         </button>
 
-            <button
-              onClick={() => {
-                setMode(mode === "dark" ? "light" : "dark");
-              }}
-              style={{
-                height: 32,
-                padding: "0 20px",
-                borderRadius: 10,
-                border: "0 none",
-                marginLeft: 10,
-              }}
-            >
-              {mode === "dark" ? "Light" : "Dark"}
-            </button>
-          </div>
-        </h1>
+    //         <button
+    //           onClick={() => {
+    //             setMode(mode === "dark" ? "light" : "dark");
+    //           }}
+    //           style={{
+    //             height: 32,
+    //             padding: "0 20px",
+    //             borderRadius: 10,
+    //             border: "0 none",
+    //             marginLeft: 10,
+    //           }}
+    //         >
+    //           {mode === "dark" ? "Light" : "Dark"}
+    //         </button>
+    //       </div>
+    //     </h1>
 
-        {showForm && <Form add={add} />}
-        <List>
-          {data.map((item) => (
-            <Item key={item.id} item={item} remove={remove} />
-          ))}
-        </List>
-      </div>
-    </div>
+    //     {showForm && <Form add={add} />}
+    //     <List>
+    //       {data.map((item) => (
+    //         <Item key={item.id} item={item} remove={remove} />
+    //       ))}
+    //     </List>
+    //   </div>
+    // </div>
   );
 }

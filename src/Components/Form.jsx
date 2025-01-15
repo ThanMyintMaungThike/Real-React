@@ -1,5 +1,5 @@
 import { useContext, useRef } from "react";
-import { AppContext } from "./ThemedApp";
+import { AppContext } from "../ThemedApp";
 
 export default function Form({ add }) {
   const { mode } = useContext(AppContext);
