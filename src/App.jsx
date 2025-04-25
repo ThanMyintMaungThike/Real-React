@@ -1,52 +1,66 @@
-import { useContext, useState } from "react";
-import List from "./List";
-import Item from "./Components/Item";
-// import { Fruit } from "./Item"
-import Form from "./Components/Form";
-import { AppContext } from "./ThemedApp";
-import Header from "./Components/Header";
+// import React from "react";
+// import List from "./List";
+import { useState } from "react";
+import Item from "./components/Item";
+import Form from "./components/Form";
+import { useApp } from "./ThemedApp";
+import { Box, Container } from "@mui/material";
+import Header from "./components/Header";
+// import { AppContext } from "./ThemedApp";
+
 export default function App() {
+  // const { mode, setMode } = useContext(AppContext);
+  // const [showForm, setShowForm] = useState(false);
+
+  const { showForm, setGlobalMsg } = useApp();
+
   const [data, setData] = useState([
-    { id: 1, content: "Hello World!", name: "Alice" },
+    { id: 3, content: "Yay, interesting", name: "Peter" },
     { id: 2, content: "React is fun.", name: "Bob" },
-    { id: 3, content: "Yah! really interesting.", name: "Peter" },
+    { id: 1, content: "Hello World!", name: "Alice" }
   ]);
 
-  const [showForm, setShowForm] = useState(false);
-
-  const { mode, setMode } = useContext(AppContext);
-
   const remove = (id) => {
-    setData(data.filter((item) => item.id !== id));
+    setData(data.filter((item) => item.id != id));
+    setGlobalMsg("An item deleted");
   };
 
   const add = (content, name) => {
-    const id = data.length > 0 ? data[data.length - 1].id + 1 : 1;
-
-    // const id = data[data.length - 1] . id + 1;
-
-    setData([...data, { id, content, name }]);
+    const id = data[0].id + 1;
+    console.log(data[0].id);
+    setData([{ id, content, name }, ...data]);
+    setGlobalMsg("An item added");
   };
 
   return (
-    <Header />
+    <Box>
+      <Header />
+      <Container maxWidth="md" sx={{ mt: 4 }}>
+        {showForm && <Form add={add} />}
+        {data.map((item) => {
+          return <Item key={item.id} item={item} remove={remove} />;
+        })}
+      </Container>
+    </Box>
     // <div
     //   style={{
     //     minHeight: 1500,
     //     background: mode === "dark" ? "black" : "white",
     //     color: mode === "dark" ? "white" : "black",
-    //     paddingTop: 20,
-    //   }}
-    // >
-    //   <div style={{ maxWidth: 600, margin: "20px auto" }}>
+    //     paddingTop: 20
+    //   }}>
+    //   <div
+    //     style={{
+    //       maxWidth: 500,
+    //       margin: "0 auto"
+    //     }}>
     //     <h1
     //       style={{
     //         display: "flex",
     //         justifyContent: "space-between",
-    //         alignItems: "center",
-    //       }}
-    //     >
-    //       Conversation
+    //         alignItems: "center"
+    //       }}>
+    //       Yaycha
     //       <div>
     //         <button
     //           onClick={() => setShowForm(!showForm)}
@@ -55,30 +69,25 @@ export default function App() {
     //             height: 32,
     //             borderRadius: 50,
     //             border: "0 none",
-    //             background: showForm ? "#dc3545" : "#0d6efd",
-    //             color: "white",
-    //           }}
-    //         >
-    //           {showForm ? "×" : "+"}
+    //             background: showForm ? "#dc3545" : "#0d6efd"
+    //           }}>
+    //           {showForm ? "x" : "+"}
     //         </button>
-
     //         <button
-    //           onClick={() => {
-    //             setMode(mode === "dark" ? "light" : "dark");
-    //           }}
+    //           onClick={() => setMode(mode === "dark" ? "light" : "dark")}
     //           style={{
-    //             height: 32,
+    //             marginLeft: 8,
     //             padding: "0 20px",
-    //             borderRadius: 10,
+    //             height: 32,
+    //             borderRadius: 32,
     //             border: "0 none",
-    //             marginLeft: 10,
-    //           }}
-    //         >
+    //             background: mode === "dark" ? "#333" : "#ddd",
+    //             color: mode === "dark" ? "white" : "black"
+    //           }}>
     //           {mode === "dark" ? "Light" : "Dark"}
     //         </button>
     //       </div>
     //     </h1>
-
     //     {showForm && <Form add={add} />}
     //     <List>
     //       {data.map((item) => (
