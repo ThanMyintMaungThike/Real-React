@@ -6,10 +6,9 @@ import {
   ThemeProvider
 } from "@mui/material";
 
-import App from "./App";
-import AppDrawer from "./components/AppDrawer";
-
 import { deepPurple, grey, orange } from "@mui/material/colors";
+import { RouterProvider } from "react-router-dom";
+import router from "./Router";
 
 const AppContext = createContext();
 
@@ -29,9 +28,10 @@ export default function ThemedApp() {
       palette: {
         mode,
         primary: {
-          main: "#832561"
+          main: deepPurple[500]
+          // "#832561"
         },
-        banner: mode === "dark" ? grey[800] : "#832561",
+        banner: mode === "dark" ? grey[800] : grey[200],
         text: {
           fade: grey[400]
         }
@@ -54,20 +54,7 @@ export default function ThemedApp() {
           mode,
           setMode
         }}>
-        <App />
-
-        <AppDrawer />
-
-        <Snackbar
-          anchorOrigin={{
-            horizontal: "center",
-            vertical: "bottom"
-          }}
-          open={Boolean(globalMsg)}
-          autoHideDuration={6000}
-          onClose={() => setGlobalMsg(null)}
-          message={globalMsg}
-        />
+        <RouterProvider router={router} />
         <CssBaseline />
       </AppContext.Provider>
     </ThemeProvider>

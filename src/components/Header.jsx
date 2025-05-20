@@ -4,7 +4,8 @@ import {
   Add as AddIcon,
   LightMode as LightModeIcon,
   DarkMode as DarkModeIcon,
-  Menu as MenuIcon
+  Menu as MenuIcon,
+  Clear as ClearIcon
 } from "@mui/icons-material";
 
 export default function Header() {
@@ -26,7 +27,8 @@ export default function Header() {
 
         <Box>
           <IconButton color="inherit" onClick={() => setShowForm(!showForm)}>
-            <AddIcon />
+            {showForm ? <ClearIcon /> : <AddIcon />}
+            {/* <AddIcon /> */}
           </IconButton>
 
           {mode === "dark" ? (

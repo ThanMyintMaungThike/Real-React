@@ -5,10 +5,15 @@ import {
 } from "@mui/icons-material";
 import { Box, Card, CardContent, IconButton, Typography } from "@mui/material";
 import { green } from "@mui/material/colors";
+import { useNavigate } from "react-router-dom";
 
-export default function Item({ item, remove }) {
+export default function Item({ item, remove, primary }) {
+  const navigate = useNavigate();
   return (
-    <Card sx={{ mb: 2, bgcolor: "banner" }}>
+    <Card
+      sx={{ mb: 2, bgcolor: "banner" }}
+      onClick={() => navigate("/comments")}>
+      {primary && <Box sx={{ height: 50, bgcolor: green[500] }} />}
       <CardContent>
         <Box
           sx={{

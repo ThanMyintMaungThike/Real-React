@@ -19,8 +19,10 @@ import {
   Person as ProfileIcon
 } from "@mui/icons-material";
 import { deepPurple } from "@mui/material/colors";
+import { Navigate, useNavigate } from "react-router-dom";
 
 export default function AppDrawer() {
+  const navigate = useNavigate();
   const { showDrawer, setShowDrawer, auth, setAuth } = useApp();
 
   return (
@@ -73,7 +75,9 @@ export default function AppDrawer() {
                   <ListItemIcon>
                     <ProfileIcon />
                   </ListItemIcon>
-                  <ListItemText>Profile</ListItemText>
+                  <ListItemText onClick={() => navigate("/profile")}>
+                    Profile
+                  </ListItemText>
                 </ListItemButton>
               </ListItem>
 
@@ -94,7 +98,9 @@ export default function AppDrawer() {
                   <ListItemIcon>
                     <RegisterIcon />
                   </ListItemIcon>
-                  <ListItemText>Register</ListItemText>
+                  <ListItemText onClick={() => navigate("/register")}>
+                    Register
+                  </ListItemText>
                 </ListItemButton>
               </ListItem>
 
@@ -103,7 +109,11 @@ export default function AppDrawer() {
                   <ListItemIcon>
                     <LoginIcon />
                   </ListItemIcon>
-                  <ListItemText>Login</ListItemText>
+                  <ListItemText
+                    onClick={() => navigate("/login")}
+                    style={{ cursor: "pointer" }}>
+                    Login
+                  </ListItemText>
                 </ListItemButton>
               </ListItem>
             </>
